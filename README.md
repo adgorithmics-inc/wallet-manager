@@ -11,29 +11,40 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+A dart library to easily create Web3 Wallet.
+
+The most common usage of web3 wallet is to generate wallet address (public key) and private key. This library makes it easy to do it without much complexity to manually implement other web3 packages.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+1. Generate wallet address (public key)  and private key  
+2. Get current wallet address
+3. Get current private key
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+Import  ```package:wallet_manager/wallet_manager.dart```, insantiate ```WalletManager```.
 
 ```dart
-const like = 'sample';
+import 'package:wallet_manager/wallet_manager.dart';    
+
+WalletManager manager = WalletManager();  
+
+// generate new wallet
+WalletKeys keys = manager.createWallet();  
+print('${keys.publicKey}');
+print('${keys.privateKey}');
+
+// generate wallet from existing private key
+String walletAddress = await manager.restoreWallet('enter your private key here')
+
+// get current wallet address
+String walletAddress = await manager.getPublicKey();
+
+// get current private key
+String walletAddress = await manager.getPrivateKey();
+
+
 ```
 
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+This library manage only 1 private key and public key per device.
